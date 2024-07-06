@@ -3,12 +3,16 @@ package edu.escuelaing.arsw.ASE.app.MongoDBProject.Model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 @Document(collection = "estudiantes")
 public class Estudiante {
 
     @Id
     private String id;
     private String nombre;
+    private LocalDate fechaNacimiento;
     private int edad;
     private String correo;
     private String programa;
@@ -17,14 +21,17 @@ public class Estudiante {
     public Estudiante() {}
 
     // Constructor con parámetros
-    public Estudiante(String nombre, int edad, String correo, String programa) {
+    public Estudiante(String nombre, LocalDate fechaNacimiento, int edad, String correo, String programa) {
         this.nombre = nombre;
-        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad =edad;
         this.correo = correo;
         this.programa = programa;
     }
 
-    // Getters y Setters
+    public int getEdad() {
+        return edad;
+    }
     public String getId() {
         return id;
     }
@@ -41,13 +48,6 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
 
     public String getCorreo() {
         return correo;
@@ -67,6 +67,8 @@ public class Estudiante {
 
     @Override
     public String toString() {
-        return String.format("Estudiante[id=%s, nombre='%s', edad=%d, correo='%s', programa='%s']", id, nombre, edad, correo, programa);
+        return String.format(
+                "Estudiante[id=%s, nombre='%s', edad=%d, correo='%s', programa='%s']",
+                id, nombre, edad, correo, programa);
     }
 }
